@@ -24,12 +24,10 @@ export const useBooksStore = defineStore('books', {
       this.loading = true
       this.error = null
       try {
-        const auth = useAuthStore()
-        const headers = auth.token ? { Authorization: `Bearer ${auth.token}` } : {}
-        
+        const config = useRuntimeConfig()
         const { data }: any = await useFetch(
-          `http://localhost:4000/api/books/search?q=${query}`,
-          { headers }
+          `${config.public.apiBase}/books/search?q=${query}`,
+          { headers: this.getAuthHeaders() }
         )
         this.books = data.value || []
       } catch (err: any) {
@@ -46,12 +44,10 @@ export const useBooksStore = defineStore('books', {
       this.loading = true
       this.error = null
       try {
-        const auth = useAuthStore()
-        const headers = auth.token ? { Authorization: `Bearer ${auth.token}` } : {}
-        
+        const config = useRuntimeConfig()
         const { data }: any = await useFetch(
-          `http://localhost:4000/api/books/last-search`,
-          { headers }
+          `${config.public.apiBase}/books/last-search`,
+          { headers: this.getAuthHeaders() }
         )
         this.lastSearches = data.value || []
       } catch (err: any) {
@@ -73,12 +69,10 @@ export const useBooksStore = defineStore('books', {
         if (filters.author) params.append('author', filters.author)
         if (filters.withReview) params.append('withReview', 'true')
 
-        const auth = useAuthStore()
-        const headers = auth.token ? { Authorization: `Bearer ${auth.token}` } : {}
-        
+        const config = useRuntimeConfig()
         const { data }: any = await useFetch(
-          `http://localhost:4000/api/books/my-library?${params.toString()}`,
-          { headers }
+          `${config.public.apiBase}/books/my-library?${params.toString()}`,
+          { headers: this.getAuthHeaders() }
         )
         this.myLibrary = data.value || []
       } catch (err: any) {
@@ -92,15 +86,13 @@ export const useBooksStore = defineStore('books', {
       this.loading = true
       this.error = null
       try {
-        const auth = useAuthStore()
-        const headers = auth.token ? { Authorization: `Bearer ${auth.token}` } : {}
-        
+        const config = useRuntimeConfig()
         const { data }: any = await useFetch(
-          `http://localhost:4000/api/books/my-library`,
+          `${config.public.apiBase}/books/my-library`,
           {
             method: 'POST',
             body: book,
-            headers
+            headers: this.getAuthHeaders()
           }
         )
         this.myLibrary.push(data.value)
@@ -117,12 +109,10 @@ export const useBooksStore = defineStore('books', {
       this.loading = true
       this.error = null
       try {
-        const auth = useAuthStore()
-        const headers = auth.token ? { Authorization: `Bearer ${auth.token}` } : {}
-        
+        const config = useRuntimeConfig()
         const { data }: any = await useFetch(
-          `http://localhost:4000/api/books/my-library/${id}`,
-          { headers }
+          `${config.public.apiBase}/books/my-library/${id}`,
+          { headers: this.getAuthHeaders() }
         )
         return data.value
       } catch (err: any) {
@@ -137,15 +127,13 @@ export const useBooksStore = defineStore('books', {
       this.loading = true
       this.error = null
       try {
-        const auth = useAuthStore()
-        const headers = auth.token ? { Authorization: `Bearer ${auth.token}` } : {}
-        
+        const config = useRuntimeConfig()
         const { data }: any = await useFetch(
-          `http://localhost:4000/api/books/my-library/${id}`,
+          `${config.public.apiBase}/books/my-library/${id}`,
           {
             method: 'PUT',
             body: updates,
-            headers
+            headers: this.getAuthHeaders()
           }
         )
         const index = this.myLibrary.findIndex(b => b._id === id)
@@ -163,12 +151,10 @@ export const useBooksStore = defineStore('books', {
       this.loading = true
       this.error = null
       try {
-        const auth = useAuthStore()
-        const headers = auth.token ? { Authorization: `Bearer ${auth.token}` } : {}
-        
+        const config = useRuntimeConfig()
         await useFetch(
-          `http://localhost:4000/api/books/my-library/${id}`,
-          { method: 'DELETE', headers }
+          `${config.public.apiBase}/books/my-library/${id}`,
+          { method: 'DELETE', headers: this.getAuthHeaders() }
         )
         this.myLibrary = this.myLibrary.filter(b => b._id !== id)
       } catch (err: any) {
@@ -182,7 +168,8 @@ export const useBooksStore = defineStore('books', {
     // Obtener URL de portada
     // =========================
     getCoverUrl(id: string) {
-      return `http://localhost:4000/api/books/library/front-cover/${id}`
+      const config = useRuntimeConfig()
+      return `${config.public.apiBase}/books/library/front-cover/${id}`
     }
   }
 })

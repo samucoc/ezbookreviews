@@ -25,17 +25,14 @@ export const registerUser = async (req: Request, res: Response) => {
 export const loginUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
-    console.log("Login attempt:", email);
 
     // Verificar si el usuario existe
     const user = await User.findOne({ email });
-    console.log("User found:", user);
 
     if (!user) return res.status(400).json({ message: "Usuario no encontrado" });
 
     // Verificar contraseña
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log("Password match:", isMatch);
 
     if (!isMatch) return res.status(400).json({ message: "Contraseña incorrecta" });
 
