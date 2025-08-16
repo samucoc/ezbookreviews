@@ -1,6 +1,6 @@
 <template>
   <div class="book-card" @click="$emit('select', book)">
-    <img :src="book.cover || '/placeholder.png'" alt="Portada"/>
+    <img :src="book.cover || '/placeholder.jpg'" alt="Portada"/>
     <h3>{{ book.title }}</h3>
     <p>{{ book.author }}</p>
   </div>
