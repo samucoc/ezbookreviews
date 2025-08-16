@@ -22,29 +22,32 @@
 ### Backend
 
    1. Clonar el repositorio y entrar a la carpeta backend:
-      git clone https://github.com/samucoc/ezbookreviews.git
-      git checkout dev
-      cd backend
+         git clone https://github.com/samucoc/ezbookreviews.git
+         git checkout dev
+         cd backend
    2. Instalar dependencias:
          npm install
    3. Configurar variables de entorno (.env):
-      PORT=4000
-      MONGO_URI=your_mongodb_uri
-      JWT_SECRET=your_jwt_secret
+         PORT=4000
+         MONGODB_URI=XXXXXXXXXXXX
+         OPENLIBRARY_BASE=https://openlibrary.org
+         COVERS_BASE=https://covers.openlibrary.org
+         JWT_SECRET=YYYYYYYYYYYYYY
    4. Iniciar servidor:
-      npm run dev
+         npm run dev
 
    El backend estará corriendo en http://localhost:4000.
 
 ### Frontend
 
    1. Entrar a la carpeta frontend:
-      cd frontend
+         cd frontend
    2. Instalar dependencias:
-      npm install
-   3. Iniciar Nuxt 3:
-      npm run dev
-
+         npm install
+   3. Configurar variable entorno
+         NUXT_PUBLIC_API_BASE=http://localhost:4000/api     // ejemplo
+   4. Iniciar Nuxt 3:
+         npm run dev
    El frontend estará corriendo en http://localhost:3000.
 
 ## Dependencias
