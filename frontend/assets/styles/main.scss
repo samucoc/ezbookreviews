@@ -1,0 +1,227 @@
+@import './variables';
+
+body {
+  font-family: $font-family;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f6f8;
+  color: #333;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: $border-radius;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+button.primary {
+  background-color: $primary-color;
+  color: white;
+
+  &:hover {
+    background-color: $primary-hover;
+  }
+}
+
+button.success {
+  background-color: $success-color;
+  color: white;
+  &:hover {
+    background-color: darken($success-color, 10%);
+  }
+}
+
+button.error {
+  background-color: $error-color;
+  color: white;
+  &:hover {
+    background-color: darken($error-color, 10%);
+  }
+}
+
+/* Search Page */
+.search-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+
+  .search-container {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+
+    input[type="text"] {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-radius: $border-radius;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .search-history {
+      margin-bottom: 1rem;
+      text-align: left;
+
+      ul {
+        list-style: none;
+        padding: 0;
+        li {
+          cursor: pointer;
+          padding: 0.25rem 0;
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+
+    .results {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+  }
+}
+
+/* BookCard */
+.book-card {
+  background: white;
+  border-radius: $border-radius;
+  padding: 0.5rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+
+  img {
+    width: 100%;
+    border-radius: $border-radius;
+    margin-bottom: 0.5rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+    margin: 0.25rem 0;
+  }
+
+  p {
+    font-size: 0.85rem;
+    margin: 0;
+    color: #666;
+  }
+}
+
+/* BookDetail */
+.book-detail {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: $border-radius;
+  padding: 2rem;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 1000;
+
+  .cover {
+    width: 100%;
+    margin-bottom: 1rem;
+    img {
+      width: 100%;
+      border-radius: $border-radius;
+    }
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: $border-radius;
+    border: 1px solid #ccc;
+  }
+
+  .rating {
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+
+    span {
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #ccc;
+
+      &.selected {
+        color: gold;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+}
+
+/* My Library */
+.library-container {
+  max-width: 900px;
+  margin: 0 auto;
+  .controls {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+
+    input, select {
+      padding: 0.5rem;
+      border-radius: $border-radius;
+      border: 1px solid #ccc;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  .library-books {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px,1fr));
+    gap: 1rem;
+
+    .book-wrapper {
+      position: relative;
+      .actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+
+        button {
+          padding: 0.25rem 0.5rem;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
